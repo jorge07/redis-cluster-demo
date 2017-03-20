@@ -16,4 +16,10 @@ Testing the cluster:
        
     redis-cli -p 7001 cluster nodes
     docker kill rediscluster_master2_1
-    redis-cli -p 7001 cluster nodes
+    redis-cli -p 7001 cluster nodes
+    
+# K8s
+
+Require envsubst and kubectl
+   
+   ./k8s/boot.sh -i=NUM_INSTANCES 
