@@ -38,7 +38,7 @@ fi
 for ((i=0;i<=INSTANCES-1;i++)); do
     export INSTANCE_NUMBER=$i;
 
-    echo "Creating node $i";
+    echo "Creating node service: $i";
     envsubst <k8s/deployment/deployment> k8s/deployment/deployment-${INSTANCE_NUMBER}.yml;
     envsubst <k8s/service/service> k8s/service/service-${INSTANCE_NUMBER}.yml;
 
@@ -57,4 +57,4 @@ for i in `kubectl get svc | grep redis | awk '{print $2}'`; do
 done
 
 echo "Bootstraping the cluster"
-kubectl run -i --tty redis-c --image=jorge07/redis-trib  --restart=Never --command -- sh -c "echo 'yes' | ./redis-trib.rb create --replicas 1 $SERVICE"
+kubectl run redis-c --image=jorge07/redis-trib --restart=Never --command -- sh -c "echo 'yes' | ./redis-trib.rb create --replicas 1 $SERVICES"
