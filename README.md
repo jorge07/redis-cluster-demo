@@ -7,12 +7,8 @@ The redis containers are based on alpine of course and are optimized to use the 
 
     docker-compose build
     docker-compose up -d
-    
-Download redis repo :
-    
-    git clone git@github.com:antirez/redis.git redis
-    cd redis/src
-    echo "yes" | ./redis-trib.rb create --replicas 1 192.168.99.100:7001 192.168.99.100:7002 192.168.99.100:7003 192.168.99.100:6000 192.168.99.100:6001 192.168.99.100:6002
+ 
+    docker run -it jorge07/redis-trib sh -c "echo 'yes' | ./redis-trib.rb create --replicas 1 192.168.99.100:7001 192.168.99.100:7002 192.168.99.100:7003 192.168.99.100:6000 192.168.99.100:6001 192.168.99.100:6002"
     
 Done.
 

@@ -6,8 +6,8 @@ ADD rootfs /
 
 RUN sed -i -e "s/6379/$PORT/g" /usr/local/redis/redis.conf
 
-WORKDIR /redis-master-data
+WORKDIR /data
 
-VOLUME /redis-master-data
+VOLUME /data
 
 CMD [ "redis-server", "/usr/local/redis/redis.conf" ]

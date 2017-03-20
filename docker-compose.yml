@@ -29,7 +29,7 @@ services:
 
   slave0:
     build:
-      context: slave
+      context: master
       dockerfile: Dockerfile
       args:
          PORT: 6000
@@ -37,7 +37,7 @@ services:
 
   slave1:
     build:
-      context: slave
+      context: master
       dockerfile: Dockerfile
       args:
          PORT: 6001
@@ -45,7 +45,7 @@ services:
 
   slave2:
     build:
-      context: slave
+      context: master
       dockerfile: Dockerfile
       args:
          PORT: 6002
@@ -53,7 +53,7 @@ services:
 
   slave3:
     build:
-      context: slave
+      context: master
       dockerfile: Dockerfile
       args:
          PORT: 6003
@@ -61,14 +61,14 @@ services:
 
   slave4:
     build:
-      context: slave
+      context: master
       dockerfile: Dockerfile
       args:
          PORT: 6005
     network_mode: "host"
   slave5:
     build:
-      context: slave
+      context: master
       dockerfile: Dockerfile
       args:
          PORT: 6006
