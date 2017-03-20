@@ -58,3 +58,18 @@ services:
       args:
          PORT: 6003
     network_mode: "host"
+
+  slave4:
+    build:
+      context: slave
+      dockerfile: Dockerfile
+      args:
+         PORT: 6005
+    network_mode: "host"
+  slave5:
+    build:
+      context: slave
+      dockerfile: Dockerfile
+      args:
+         PORT: 6006
+    network_mode: "host"

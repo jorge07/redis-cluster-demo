@@ -15,3 +15,9 @@ Download redis repo :
     echo "yes" | ./redis-trib.rb create --replicas 1 192.168.99.100:7001 192.168.99.100:7002 192.168.99.100:7003 192.168.99.100:6000 192.168.99.100:6001 192.168.99.100:6002
     
 Done.
+
+Testing the cluster:
+       
+    redis-cli -p 7001 cluster nodes
+    docker kill rediscluster_master2_1
+    redis-cli -p 7001 cluster nodes
