@@ -1,0 +1,60 @@
+version: '2'
+
+services:
+
+  master1:
+    build:
+      context: master
+      dockerfile: Dockerfile
+      args:
+         PORT: 7001
+    network_mode: "host"
+
+  master2:
+    build:
+      context: master
+      dockerfile: Dockerfile
+      args:
+         PORT: 7002
+    network_mode: "host"
+
+  master3:
+    build:
+      context: master
+      dockerfile: Dockerfile
+      args:
+         PORT: 7003
+
+    network_mode: "host"
+
+  slave0:
+    build:
+      context: slave
+      dockerfile: Dockerfile
+      args:
+         PORT: 6000
+    network_mode: "host"
+
+  slave1:
+    build:
+      context: slave
+      dockerfile: Dockerfile
+      args:
+         PORT: 6001
+    network_mode: "host"
+
+  slave2:
+    build:
+      context: slave
+      dockerfile: Dockerfile
+      args:
+         PORT: 6002
+    network_mode: "host"
+
+  slave3:
+    build:
+      context: slave
+      dockerfile: Dockerfile
+      args:
+         PORT: 6003
+    network_mode: "host"
