@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: redis-1
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redis
+        name: redis-1
+    spec:
+      containers:
+      - name: redis
+        image: jorge07/redis-cluster-instance:3.2
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "500Mi"
+        ports:
+          - name: redis
+            containerPort: 6379
+            protocol: "TCP"
+          - name: cluster
+            containerPort: 16379
+            protocol: "TCP"
