@@ -20,6 +20,6 @@ Testing the cluster:
     
 # K8s
 
-Require envsubst and kubectl
-   
-    ./k8s/boot.sh -i=NUM_INSTANCES 
+Require **envsubst** and **kubectl**
+
+    ./k8s/boot.sh -i=NUM_INSTANCES
