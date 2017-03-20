@@ -1,0 +1,17 @@
+Redis Cluster Tutorial
+======================
+
+This is the [official Redis tutorial](https://redis.io/topics/cluster-tutorial) I follow to build the cluster basically.
+
+The redis containers are based on alpine of course and are optimized to use the minimum of possible layers to be configurable.
+
+    docker-compose build
+    docker-compose up -d
+    
+Download redis repo :
+    
+    git clone git@github.com:antirez/redis.git redis
+    cd redis/src
+    echo "yes" | ./redis-trib.rb create --replicas 1 192.168.99.100:7001 192.168.99.100:7002 192.168.99.100:7003 192.168.99.100:6000 192.168.99.100:6001 192.168.99.100:6002
+    
+Done.
