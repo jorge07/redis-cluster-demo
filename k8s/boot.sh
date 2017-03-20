@@ -56,8 +56,5 @@ for i in `kubectl get svc | grep redis | awk '{print $2}'`; do
     SERVICES=$SERVICES" $i:6379"
 done
 
-echo $SERVICES
-
-echo "Execute: kubectl run -i --tty redis-c --image=jorge07/redis-trib  --restart=Never --command -- sh -l"
-
-echo "Run inside: ./redis-trib.rb create --replicas 1 $SERVICES"
+echo "Bootstraping the cluster"
+kubectl run -i --tty redis-c --image=jorge07/redis-trib  --restart=Never --command -- sh -c "esho 'yes' | ./redis-trib.rb create --replicas 1 $SERVICE"
