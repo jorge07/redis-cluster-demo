@@ -8,21 +8,26 @@ for i in "$@"
 do
 case $i in
     -i=*|--instances=*)
-    INSTANCES="${i#*=}"
-
+        INSTANCES="${i#*=}"
     ;;
     ---no-clean)
-    CLEAN=false
+        CLEAN=false
+    ;;
+    --help)
+        echo "Kubernetes Redis cluster bootstrapping."
+        echo ""
+        echo "-i           Number of instances. Default 6."
+        echo "--no-clean   Avoid remove old cluster."
+        echo ""
+        exit;
     ;;
     *)
     ;;
 esac
 done
 
-mkdir -p k8s/tmp
-
 if $CLEAN; then
-    echo "Cleaning old env"
+    echo "Cleaning old cluster"
 
     if kubectl get deploy/redis-0 &> /dev/null; then
 
@@ -48,13 +53,13 @@ done
 kubectl create -f k8s/deployment
 kubectl create -f k8s/service
 
+echo "Waiting for ip assignations"
 sleep 5
-
 
 for i in `kubectl get svc | grep redis | awk '{print $2}'`; do
 
     SERVICES=$SERVICES" $i:6379"
 done
 
-echo "Bootstraping the cluster"
+echo "Bootstrapping the cluster"
 kubectl run redis-c --image=jorge07/redis-trib --restart=Never --command -- sh -c "echo 'yes' | ./redis-trib.rb create --replicas 1 $SERVICES"
