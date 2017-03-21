@@ -2,6 +2,7 @@
 
 INSTANCES=6
 IMAGE=jorge07/redis-cluster-instance:3.2
+REPLICAS=1
 CLEAN=true
 SERVICES=''
 
@@ -14,6 +15,9 @@ case $i in
     -img=*|--image=*)
         IMAGE="${i#*=}"
     ;;
+    -r=*|--replicas=*)
+        REPLICAS="${i#*=}"
+    ;;
     ---no-clean)
         CLEAN=false
     ;;
@@ -21,7 +25,8 @@ case $i in
         echo "Kubernetes Redis cluster bootstrapping."
         echo ""
         echo "-i|--instances    Number of instances. Default -i=6"
-        echo "-img|--image      Number of instances. Default -i=6"
+        echo "-r|--replicas     Number of cluster replicas. Default -r=1"
+        echo "-img|--image      Docker image. Default -img=jorge07/redis-cluster-instance:3.2"
         echo "--no-clean        Avoid remove old cluster."
         echo ""
         exit;
@@ -68,4 +73,4 @@ for i in `kubectl get svc | grep redis | awk '{print $2}'`; do
 done
 
 echo "Bootstrapping the cluster"
-kubectl run redis-c --image=jorge07/redis-trib --restart=Never --command -- sh -c "echo 'yes' | ./redis-trib.rb create --replicas 1 $SERVICES"
+kubectl run redis-c --image=jorge07/redis-trib --restart=Never --command -- sh -c "echo 'yes' | ./redis-trib.rb create --replicas $REPLICAS $SERVICES"
