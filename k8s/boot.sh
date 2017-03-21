@@ -16,7 +16,7 @@ case $i in
     --help)
         echo "Kubernetes Redis cluster bootstrapping."
         echo ""
-        echo "-i           Number of instances. Default 6."
+        echo "-i           Number of instances. Default -i=6"
         echo "--no-clean   Avoid remove old cluster."
         echo ""
         exit;
