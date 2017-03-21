@@ -22,4 +22,5 @@ Testing the cluster:
 
 Require **envsubst** and **kubectl**
 
-    ./k8s/boot.sh -i=NUM_INSTANCES
+    ./k8s/boot.sh --help
+    ./k8s/boot.sh -i=NUM_INSTANCES -img=DOCKER_IMAGE
