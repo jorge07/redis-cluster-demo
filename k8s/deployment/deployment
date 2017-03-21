@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
       - name: redis
-        image: jorge07/redis-cluster-instance:3.2
+        image: ${IMAGE}
         resources:
           requests:
             cpu: "200m"

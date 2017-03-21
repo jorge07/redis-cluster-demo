@@ -1,6 +1,7 @@
 #!/bin/bash
 
 INSTANCES=6
+IMAGE=jorge07/redis-cluster-instance:3.2
 CLEAN=true
 SERVICES=''
 
@@ -10,14 +11,18 @@ case $i in
     -i=*|--instances=*)
         INSTANCES="${i#*=}"
     ;;
+    -img=*|--image=*)
+        IMAGE="${i#*=}"
+    ;;
     ---no-clean)
         CLEAN=false
     ;;
     --help)
         echo "Kubernetes Redis cluster bootstrapping."
         echo ""
-        echo "-i           Number of instances. Default -i=6"
-        echo "--no-clean   Avoid remove old cluster."
+        echo "-i|--instances    Number of instances. Default -i=6"
+        echo "-img|--image      Number of instances. Default -i=6"
+        echo "--no-clean        Avoid remove old cluster."
         echo ""
         exit;
     ;;
@@ -42,6 +47,7 @@ fi
 
 for ((i=0;i<=INSTANCES-1;i++)); do
     export INSTANCE_NUMBER=$i;
+    export IMAGE=$IMAGE;
 
     echo "Creating node service: $i";
     envsubst <k8s/deployment/deployment> k8s/deployment/deployment-${INSTANCE_NUMBER}.yml;
